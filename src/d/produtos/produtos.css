@@ -1,0 +1,71 @@
+.topDivProdutos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 50px;
+}
+.topDivProdutos > div:first-child > h1{
+    font-size: 30px;
+}
+.topDivProdutos > div:first-child > h2{
+    font-size: 15px;
+}
+.topDivProdutos > div:first-child > h2{
+    font-size: 15px;
+}
+.produtosPesquisa{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;   
+    gap: 15px;
+}
+.produtosPesquisa > .bnt-pesquisarProduto{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.bnt-pesquisarProduto > svg{
+    font-size: 25px;
+}
+.bnt-pesquisarProduto > input{
+    font-size: 16px;
+    outline: none;
+    border: none;
+    height: 40px;
+}
+.produtosPesquisa > select,
+.produtosPesquisa > div,
+.produtosPesquisa > button{
+    font-size: 15px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 0px 8px;
+    border-radius: 7px;
+    height: 45px;
+    transition: 0.3s;
+}
+.produtosPesquisa > select:hover,
+.produtosPesquisa > div:hover,
+.produtosPesquisa > button:hover{
+    transform: scale(1.05);
+}
+
+.produtosPesquisa > button{
+    background-color: var(--sidebar-color);
+    color: white;
+}
+.noneAnimation:hover, .noneAnimation:hover{
+    transform: none;
+}
+.listProdutos{
+    padding: 25px 50px;
+    border-radius: 15px;
+}
+.listProdutos>div:first-child>div:first-child{
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 7px;
+
+}

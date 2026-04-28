@@ -1,0 +1,19 @@
+.horizontalbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 75px;
+    background-color: white;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.horizontalbar >div> h1{
+    font-size: 30px;
+}
+.horizontalbar >div> svg{
+    font-size: 27px;
+}
+.horizontalbar >div{
+    margin: 50px;
+}

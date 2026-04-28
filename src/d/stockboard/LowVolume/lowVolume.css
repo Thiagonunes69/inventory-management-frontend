@@ -1,0 +1,7 @@
+.lowVolume{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 200px;
+  overflow-y: scroll;
+}

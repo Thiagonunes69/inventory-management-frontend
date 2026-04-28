@@ -1,0 +1,22 @@
+.box {
+    padding: 25px;
+}
+.box h1{
+    font-size: 23px;
+}
+.box h2{
+    font-size: 15px;
+}
+.boxBody{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.boxBody > div:first-child{
+    display: flex;
+    justify-content: space-between;
+}
+.FaturamentoGrafico{
+  width: 100%;
+  height: 255px;
+}

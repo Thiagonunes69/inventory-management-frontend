@@ -1,0 +1,72 @@
+.main{
+    display: flex;
+    flex-direction: row;
+}
+.DashBoard{
+    flex: 1;
+}
+.bodyDashBoard{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);;
+    gap: 20px;
+    padding: 25px 50px 0px;
+}
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.card > svg{
+    font-size: 60px;
+    background-color: var(--sidebar-color);
+    padding: 12px;
+    border-radius: 15px;
+    color: white;
+}
+.card > .yellow{
+    background-color: orange;
+}
+.card > .red{
+    background-color: red;
+}
+.card > .green{
+    background-color: green;
+}
+.card > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.card > div > h1{
+    font-size: 15px;
+}
+.card > div > p{
+    font-size: 30px;
+}
+.card, .box{
+    width: 100%;
+    height: 100px;
+    border-radius: 15px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+.card:hover, .box:hover{
+    transform: scale(1.05);
+}
+.box{
+    grid-column: span 2;
+    height: 375px;
+}
+.left{
+    height: 350px;
+}
+.bottom{
+    height: 326px;
+    position: relative;
+    top: -26px;
+}
+.right{
+    height: 300px;
+    top: 0%;
+}

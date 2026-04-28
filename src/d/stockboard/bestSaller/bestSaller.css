@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 275px;
+  overflow-y: scroll;
+}
+
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.item img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.pcs {
+  font-weight: bold;
+  color: #22c55e;
+}
