@@ -11,9 +11,9 @@ function Sidebar() {
               <img src={logo} alt="" />
             </div>
             <div className="sidebarBody">
-              <div><MdOutlineDashboard/>StockBoard</div>
-              <div><FaBox/>Produtos</div>
-              <div><FaHistory/>Movimentações</div>
+              <div><MdOutlineDashboard/><a href="/dashboard">StockBoard</a></div>
+              <div><FaBox/><a href="/produtos">Produtos</a></div>
+              <div><FaHistory/><a href="movimentacao">Movimentações</a></div>
               <div><FaChartBar/>Relatórios</div>
               <div><FaExclamationTriangle/>Estoque Baixo</div>
             </div>

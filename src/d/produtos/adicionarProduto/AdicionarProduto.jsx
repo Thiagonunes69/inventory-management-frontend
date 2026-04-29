@@ -31,7 +31,8 @@ function AdicionarProduto({ fechar }) {
       if (!response.ok) throw new Error();
 
       alert("✅ Produto adicionado!");
-      fechar(); // fecha o modal
+      fechar(); 
+      window.location.reload();//alterar dps
 
     } catch (error) {
       alert("❌ Erro ao adicionar produto");

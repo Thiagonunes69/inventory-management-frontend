@@ -1,8 +1,9 @@
 import "./listagemProdutos.css";
 import { useState, useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import EditarProduto from "../editarProduto/EditarProduto";
 
-function ListagemProdutos({ busca = "", categoria = "todos", status = "todos" }) {
+function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", resumo}) {
   const [produtos, setProdutos] = useState([]);
 
   const [modal, setModal] = useState(null);
@@ -33,9 +34,9 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos" })
         nome: p.nome,
         descricao: p.descricao,
         codigo: p.codigo,
-        estoque: p.qnt, // 👈 backend usa qnt
-        categoria: p.usuarioNome, // 👈 TEMPORÁRIO (ajuste se tiver categoria real)
-        preco: 0, // 👈 se não vier ainda
+        estoque: p.qnt, // backend usa qnt
+        categoria: p.usuarioNome, //  TEMPORÁRIO (ajuste se tiver categoria real)
+        preco: 0, //  se não vier ainda
         imagem: "https://via.placeholder.com/40",
       }));
 
@@ -70,7 +71,7 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos" })
     return matchBusca && matchCategoria && matchStatus;
   });
 
-  // 🔥 HANDLERS
+  // HANDLERS
   const openModal = (tipo, produto) => {
     setProdutoSelecionado(produto);
     setModal(tipo);
@@ -98,12 +99,12 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos" })
       }
 
       // remove da tela depois de deletar no backend
+      // remover dps
       setProdutos((prev) =>
         prev.filter((p) => p.id !== produtoSelecionado.id)
       );
-
       closeModal();
-
+      window.location.reload();//alterar dps!!
     } catch (error) {
       console.error(error);
       alert("❌ Erro ao deletar produto");
@@ -148,7 +149,7 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos" })
 
                   <td>R$ {p.preco}</td>
 
-                  <td>{p.estoque} un</td>
+                  <td>{p.estoque}</td>
 
                   <td>
                     <span className={`status ${status}`}>
@@ -179,9 +180,7 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos" })
 
             {modal === "edit" && (
               <>
-                <h2>Editar Produto</h2>
-                <input defaultValue={produtoSelecionado.nome} />
-                <button onClick={closeModal}>Salvar</button>
+                <EditarProduto closeModal={closeModal} produto={produtoSelecionado} setProdutos={setProdutos} />
               </>
             )}
 
