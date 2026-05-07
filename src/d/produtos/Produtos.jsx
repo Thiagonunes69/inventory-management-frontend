@@ -101,7 +101,7 @@ useEffect(() => {
                     </div>
                 </div>
             </section>
-            <section className="listProdutos">
+            <section className="listas">
                 <ListagemProdutos busca={busca} categoria={categoria} status={status}/>
             </section>
             {mostrarAdicionar && (<AdicionarProduto fechar={() => setMostrarAdicionar(false)} />)}

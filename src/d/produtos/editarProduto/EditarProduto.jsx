@@ -24,7 +24,6 @@ function EditarProduto({ closeModal ,produto, setProdutos={setProdutos}}) {
              nome,
              descricao,
              codigo,
-             qnt: Number(qnt),
             }),
         }
     );
@@ -74,11 +73,6 @@ function EditarProduto({ closeModal ,produto, setProdutos={setProdutos}}) {
           <div className="input-group">
             <label>Código</label>
             <input value={codigo} onChange={(e) => setCodigo(e.target.value)} required />
-          </div>
-
-          <div className="input-group">
-            <label>Quantidade</label>
-            <input type="number" value={qnt} onChange={(e) => setQnt(e.target.value)} required />
           </div>
 
           <div className="modal-actions">

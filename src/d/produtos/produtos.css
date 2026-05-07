@@ -59,13 +59,3 @@
 .noneAnimation:hover, .noneAnimation:hover{
     transform: none;
 }
-.listProdutos{
-    padding: 25px 50px;
-    border-radius: 15px;
-}
-.listProdutos>div:first-child>div:first-child{
-    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 7px;
-
-}

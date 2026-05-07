@@ -58,7 +58,7 @@ td {
   font-size: 12px;
 }
 
-.status.ok {
+.status.ok, .status.entrada {
   background: #dcfce7;
   color: #16a34a;
 }
@@ -68,7 +68,7 @@ td {
   color: #ca8a04;
 }
 
-.status.esgotado {
+.status.esgotado, .status.saida{
   background: #fee2e2;
   color: #dc2626;
 }

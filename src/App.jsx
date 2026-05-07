@@ -4,6 +4,7 @@ import Login from "./login/login/Login";
 import Registrar from "./login/registrar/Registrar";
 import DashBoard from "./d/stockboard/Stockboard";
 import Produtos from "./d/produtos/Produtos";
+import Movimentacao from "./d/movimentacao/Movimentacao";
 import ListagemProdutos from "./d/produtos/listarProdutos/ListagemProdutos";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='/registrar' element={<Registrar/>}></Route>
         <Route path='/dashBoard' element={<DashBoard/>}></Route>
         <Route path='/produtos' element={<Produtos/>}></Route>
+        <Route path='/movimentacao' element={<Movimentacao/>}></Route>
         <Route path='/testes' element={<ListagemProdutos/>}></Route>
       </Routes>
     </BrowserRouter>
