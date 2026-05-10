@@ -1,10 +1,16 @@
 import "../../Dashboard.css";
-import "../../produtos/listarProdutos/listagemProdutos.css";
+import "../../modais.css"
+import "./listaMove.css"
 
 import { useState, useEffect } from "react";
+import { AiFillCloseCircle, AiOutlineClose } from "react-icons/ai";
+import { BiTransferAlt } from "react-icons/bi";
 
 function ListaMove() {
+  
   const [movimentacoes, setMovimentacoes] = useState([]);
+  const [modal, setModal] = useState(null);
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
   useEffect(() => {
     const fetchMove = async () => {
@@ -49,6 +55,15 @@ function ListaMove() {
     fetchMove();
   }, []);
 
+  const openModal = (tipo, produto) => {
+    setProdutoSelecionado(produto);
+    setModal(tipo);
+  };
+
+  const closeModal = () => {
+    setModal(null);
+    setProdutoSelecionado(null);
+  };
   return (
     <div className="table">
       <table>
@@ -68,35 +83,22 @@ function ListaMove() {
           {movimentacoes.map((m, index) => (
             <tr key={m.id}>
               <td>{m.codigo}</td>
-
-              <td className="produto">
-                <div>
-                  <strong>{m.nome}</strong>
-                  <span>{m.codigo}</span>
-                </div>
-              </td>
-
+              <td >{m.nome}</td>
               <td>
                 <span className={`tipo ${m.tipo.toLowerCase()}`}>
                   {m.tipo === "ENTRADA" && "Entrada"}
                   {m.tipo === "SAIDA" && "Saída"}
                 </span>
               </td>
-
               <td>{m.quantidade}</td>
-
               <td>
-
                 {/* <span className="tag">{m.loja}</span> */}
                 <span className="tag">Loja Central</span>
               </td>
-
-              <td>
-                {new Date(m.data).toLocaleDateString("pt-BR")}
-              </td>
+              <td>{new Date(m.data).toLocaleDateString("pt-BR")}</td>
 
               <td className="acoes">
-                <button onClick={() => console.log(m)}>
+                <button onClick={() => openModal("view", m)}>
                   👁️
                 </button>
               </td>
@@ -104,6 +106,86 @@ function ListaMove() {
           ))}
         </tbody>
       </table>
+      {modal && (
+  <div className="overlay">
+    <div className="modal">
+
+      {/* FECHAR */}
+      <button className="close" onClick={closeModal}>
+        <AiOutlineClose />
+      </button>
+
+      {/* TOPO */}
+      <div className="modalTop">
+
+        <div className="iconBox">
+          <BiTransferAlt />
+        </div>
+
+        <div>
+          <h1>Detalhes da Movimentação</h1>
+          <p>
+            Visualize as informações completas desta movimentação.
+          </p>
+        </div>
+
+      </div>
+
+      {/* BODY */}
+      <div className="modalBody">
+
+        <div className="row">
+          <span>Nome / Produto</span>
+
+          <div className="productInfo">
+            <h3>{produtoSelecionado.nome}</h3>
+
+            <div className="codigo">
+              {produtoSelecionado.codigo}
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <span>Data e Hora</span>
+          <h3>{produtoSelecionado.data}</h3>
+        </div>
+
+        <div className="row">
+          <span>Tipo</span>
+
+          <div className={`tipo ${produtoSelecionado.tipo}`}>
+            {produtoSelecionado.tipo}
+          </div>
+        </div>
+
+        <div className="row">
+          <span>Quantidade</span>
+          <h3>{produtoSelecionado.quantidade}</h3>
+        </div>
+
+        <div className="row">
+          <span>Loja</span>
+          <h3>Loja Central</h3>
+        </div>
+
+        <div className="row">
+          <span>Observação</span>
+          <h3>{produtoSelecionado.observacao}</h3>
+        </div>
+
+      </div>
+
+      {/* FOOTER */}
+      <div className="modalFooter">
+        <button onClick={closeModal}>
+          Fechar
+        </button>
+      </div>
+
+    </div>
+  </div>
+)}
     </div>
   );
 }

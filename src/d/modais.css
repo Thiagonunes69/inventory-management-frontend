@@ -1,0 +1,277 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(3px);
+  z-index: 999;
+}
+
+.modal {
+  width: 650px;
+  background: white;
+  border-radius: 15px;
+
+  padding: 28px;
+
+  position: relative;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+
+  animation: modalOpen 0.25s ease;
+}
+
+/* ANIMAÇÃO */
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* FECHAR */
+.close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+
+  border: none;
+  background: #f3f4f6;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.close:hover {
+  background: #e5e7eb;
+}
+
+/* TOPO */
+.modalTop {
+  display: flex;
+  gap: 18px;
+
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.iconBox {
+  width: 68px;
+  height: 68px;
+
+  border-radius: 18px;
+
+  background: #eef2ff;
+  color: #4f46e5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 34px;
+}
+
+.modalTop h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.modalTop p {
+  color: #6b7280;
+  margin-top: 5px;
+}
+
+/* BODY */
+.modalBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 0;
+
+  border-top: 1px solid #f1f5f9;
+}
+
+.row span {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.row h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* PRODUTO */
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.codigo {
+  background: #ede9fe;
+  color: #6d28d9;
+
+  padding: 5px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* TIPO */
+.tipo {
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tipo.ENTRADA {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.tipo.SAIDA {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* FOOTER */
+.modalFooter {
+  margin-top: 5px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalFooter button {
+  border: none;
+  background: #111827;
+  color: white;
+
+  padding: 12px 24px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  font-weight: 500;
+}
+
+.modalFooter button:hover {
+  opacity: .9;
+}
+
+.deleteIcon {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.cancelButton {
+  background: #f3f4f6 !important;
+  color: #111827 !important;
+  margin-right: 10px;
+}
+
+.cancelButton:hover {
+  background: #e5e7eb !important;
+}
+
+.deleteButton {
+  background: #dc2626 !important;
+}
+
+.deleteButton:hover {
+  background: #b91c1c !important;
+}
+
+/* BODY */
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  margin-top: 10px;
+}
+
+/* INPUT GROUP */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* INPUT */
+.input-group input,
+.input-group select {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  background: #f9fafb;
+
+  font-size: 15px;
+  color: #111827;
+
+  transition: all 0.2s ease;
+}
+
+/* PLACEHOLDER */
+.input-group input::placeholder {
+  color: #9ca3af;
+}
+
+/* HOVER */
+.input-group input:hover {
+  border-color: #cbd5e1;
+}
+
+/* FOCUS */
+.input-group input:focus {
+  outline: none;
+
+  border-color: #4f46e5;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 4px rgba(79, 70, 229, 0.10);
+}

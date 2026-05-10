@@ -1,6 +1,8 @@
 import "./listagemProdutos.css";
+import "../../modais.css"
 import { useState, useEffect } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCloseCircle,AiOutlineClose } from "react-icons/ai";
+import { MdDeleteOutline } from "react-icons/md";
 import EditarProduto from "../editarProduto/EditarProduto";
 
 function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", resumo}) {
@@ -184,28 +186,54 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
               </>
             )}
 
-            {modal === "view" && (
+            {/* {modal === "view" && (
               <>
                 <h2>{produtoSelecionado.nome}</h2>
                 <p>Categoria: {produtoSelecionado.categoria}</p>
                 <p>Preço: R$ {produtoSelecionado.preco}</p>
                 <p>Estoque: {produtoSelecionado.estoque}</p>
               </>
-            )}
+            )} */}
 
             {modal === "delete" && (
-              <div className="delete-modal">
-                <h2>Excluir Produto</h2>
+              <div className=" deleteModal">
+                <button className="close" onClick={closeModal}>
+                  <AiOutlineClose />
+                </button>
 
-                <p>
-                  Tem certeza que deseja excluir <strong>{produtoSelecionado.nome}</strong>?
-                </p>
+                <div className="modalTop">
+                  <div className="iconBox deleteIcon">
+                    <MdDeleteOutline />
+                  </div>
 
-                <div className="modal-actions">
-                  <button className="cancel" onClick={closeModal}>
+                  <div>
+                    <h1>Excluir Produto</h1>
+                    <p>Esta ação não poderá ser desfeita.</p>
+                  </div>
+                </div>
+
+                <div className="modalBody">
+                  <div className="row">
+                    <span>Produto</span>
+
+                    <div className="productInfo">
+                      <h3>{produtoSelecionado.nome}</h3>
+                      <div className="codigo">{produtoSelecionado.codigo}</div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <span>Status</span>
+                    <div className="tipo SAIDA">Será removido do sistema</div>
+                  </div>
+                </div>
+
+                <div className="modalFooter">
+                  <button className="cancelButton" onClick={closeModal}>
                     Cancelar
                   </button>
-                  <button className="delete-confirm" onClick={handleDelete}>
+
+                  <button className="deleteButton" onClick={handleDelete}>
                     Excluir
                   </button>
                 </div>
