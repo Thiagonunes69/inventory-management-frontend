@@ -1,7 +1,7 @@
 import "../Dashboard.css"
 import "./stockboard.css"
 import Sidebar from "../sidebarPasta/Sidebartemp";
-import Horizontalbar from "../horizontalbarPasta/horizontalbar";
+import Horizontalbar from "../horizontalbarPasta/Horizontalbar";
 import { AiFillProduct, AiFillAlert, AiOutlineCodeSandbox, AiFillDollarCircle } from "react-icons/ai";
 import Faturamento from "./faturamentoPasta/Faturamento";
 import BestSaller from "./bestSaller/BestSaller";
