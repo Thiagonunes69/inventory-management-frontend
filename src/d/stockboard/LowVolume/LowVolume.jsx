@@ -1,4 +1,4 @@
-import "../bestSaller/BestSaller.css";
+import "../bestSaller/bestSaller.css";
 import "./lowVolume.css"
 import img from "./image.png";
 
