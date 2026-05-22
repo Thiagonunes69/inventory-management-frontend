@@ -1,6 +1,6 @@
 import "../Dashboard.css"
 
-import Horizontalbar from "../horizontalbarPasta/horizontalbar"
+import Horizontalbar from "../horizontalbarPasta/Horizontalbar"
 import Sidebar from "../sidebarPasta/Sidebartemp"
 
 import { useState, useEffect } from "react";
