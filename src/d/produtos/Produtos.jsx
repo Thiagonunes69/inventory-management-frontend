@@ -23,7 +23,7 @@ function Produtos() {
 useEffect(() => {
   const fetchResumo = async () => {
     const response = await fetch(
-      "http://localhost:8080/api/produtos/resumo",
+      `${import.meta.env.VITE_API_URL}api/produtos/resumo`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

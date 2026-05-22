@@ -18,7 +18,7 @@ function AdicionarProduto({ fechar }) {
     try {
 
       const response = await fetch(
-        "http://localhost:8080/api/produtos/adicionarProduto",
+        `${import.meta.env.VITE_API_URL}/api/produtos/adicionarProduto`,
         {
           method: "POST",
 

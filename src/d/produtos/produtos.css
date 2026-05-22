@@ -9,10 +9,8 @@
     font-size: 30px;
 }
 .topDivProdutos > div:first-child > h2{
-    font-size: 15px;
-}
-.topDivProdutos > div:first-child > h2{
-    font-size: 15px;
+    font-size: 13px;
+    color: #494949;;
 }
 .produtosPesquisa{
     display: flex;

@@ -15,7 +15,7 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
   const fetchProdutos = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/produtos/listar",
+        `${import.meta.env.VITE_API_URL}/api/produtos/listar`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/produtos/removerProduto/${produtoSelecionado.id}`,
+        `${import.meta.env.VITE_API_URL}/api/produtos/removerProduto/${produtoSelecionado.id}`,
         {
           method: "DELETE",
           headers: {

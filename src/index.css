@@ -33,3 +33,11 @@ a {
 ul, ol {
   list-style: none;
 }
+
+.codigo_destaque{
+    background: #ede9fe;
+    color: #6d28d9;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+}

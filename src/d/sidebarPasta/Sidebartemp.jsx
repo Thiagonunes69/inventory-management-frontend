@@ -14,7 +14,7 @@ function Sidebar() {
               <div><MdOutlineDashboard/><a href="/dashboard">StockBoard</a></div>
               <div><FaBox/><a href="/produtos">Produtos</a></div>
               <div><FaHistory/><a href="movimentacao">Movimentações</a></div>
-              <div><FaChartBar/>Relatórios</div>
+              <div><FaChartBar/><a href="relatorio">Relatórios</a></div>
               <div><FaExclamationTriangle/>Estoque Baixo</div>
             </div>
             <div className="sidebarBottom">

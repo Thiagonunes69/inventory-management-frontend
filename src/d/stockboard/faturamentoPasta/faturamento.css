@@ -1,0 +1,27 @@
+.grafico-area{
+    width: 100%;
+    height: 250px;
+}
+
+.recharts-wrapper{
+    font-family: sans-serif;
+}
+
+.recharts-legend-item-text{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.recharts-cartesian-grid line{
+    opacity: 0.5;
+}
+
+.recharts-tooltip-wrapper{
+    outline: none;
+}
+
+.recharts-default-tooltip{
+    border-radius: 12px !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}

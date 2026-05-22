@@ -6,6 +6,7 @@ import DashBoard from "./d/stockboard/Stockboard";
 import Produtos from "./d/produtos/Produtos";
 import Movimentacao from "./d/movimentacao/Movimentacao";
 import ListagemProdutos from "./d/produtos/listarProdutos/ListagemProdutos";
+import Relatorio from "./d/relatorio/Relatorio";
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
         <Route path='/produtos' element={<Produtos/>}></Route>
         <Route path='/movimentacao' element={<Movimentacao/>}></Route>
         <Route path='/testes' element={<ListagemProdutos/>}></Route>
+        <Route path='/relatorio' element={<Relatorio/>}></Route>
       </Routes>
     </BrowserRouter>
   )

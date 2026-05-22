@@ -2,6 +2,7 @@ import "../Dashboard.css"
 
 import Horizontalbar from "../horizontalbarPasta/horizontalbar"
 import Sidebar from "../sidebarPasta/Sidebartemp"
+
 import { useState, useEffect } from "react";
 import { BiTransferAlt } from "react-icons/bi";
 import { TbPackageImport,TbPackageExport,TbClock  } from "react-icons/tb";
@@ -12,10 +13,39 @@ import AdicionarMovimentacao from "./adicionarMovimentacao/AdicionarMovimentacao
 
 function Movimentacao() {
 
-const [dataInicio, setDataInicio] = useState("");
-const [dataFim, setDataFim] = useState("");
 
-const [mostrarAdicionar, setMostrarAdicionar] = useState(false);
+  const [busca, setBusca] = useState("");
+  const [status, setStatus] = useState("todos"); 
+  const [resumo, setResumo] = useState({
+  entrada: 0,
+  saida: 0,
+  total: 0,
+  ultimaTransicao: 0,
+});
+  const [dataInicio, setDataInicio] = useState("");
+  const [dataFim, setDataFim] = useState("");
+  const [mostrarAdicionar, setMostrarAdicionar] = useState(false);
+
+
+useEffect(() => {
+  const fetchResumo = async () => {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/transacoes/resumo`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    
+    const data = await response.json();
+    data.ultimaTransicao = new Date(data.ultimaTransicao).toLocaleDateString("pt-BR");
+    setResumo(data);
+    console.log(data)
+  };
+
+  fetchResumo();
+}, []);
   return (
     <div className="main">
         <Sidebar/>
@@ -23,29 +53,19 @@ const [mostrarAdicionar, setMostrarAdicionar] = useState(false);
             <Horizontalbar/>
             <section className="topDivProdutos">
                 <div>
-                    <h1>Produtos</h1>
-                    <h2>Gerencie seu catálogo de produtos</h2>
+                    <h1>Movimentações</h1>
+                    <h2>Acompanhe todas as entradas e saídas de produtos do estoque.</h2>
                 </div>
                 <div className="produtosPesquisa">
                     <div className="bnt-pesquisarProduto">
                         <AiOutlineSearch/>
-                        <input 
-                            type="text" 
-                            placeholder="Buscar..."
-                            
-                        />
+                        <input type="text" placeholder="Buscar..." onChange={(e) => setBusca(e.target.value)}/>
                     </div>
-                    <select>
-                        <option value="todos">Todas as Categorias</option>
-                        <option value="Periféricos">Periféricos</option>
-                        <option value="Acessórios">Acessórios</option>
-                        <option value="Displays">Displays</option>
-                    </select>
-                    <select>
+
+                    <select onChange={(e) => setStatus(e.target.value)}>
                         <option value="todos">Todos os Tipos</option>
-                        <option value="ok">Entrada</option>
-                        <option value="baixo">Saida</option>
-                        <option value="esgotado">Esgotado</option>
+                        <option value="ENTRADA">Entrada</option>
+                        <option value="SAIDA">Saida</option>
                     </select>
 
                     <div className="filtro-data">
@@ -69,33 +89,33 @@ const [mostrarAdicionar, setMostrarAdicionar] = useState(false);
                     <BiTransferAlt/>
                     <div>
                         <h1>Total Movimentações</h1>
-                        <p>1</p>
+                        <p>{resumo.total}</p>
                     </div>
                 </div>
                 <div className="card noneAnimation">
                     <TbPackageImport  className="green"/>
                     <div>
                         <h1>Entradas</h1>
-                        <p>1</p>
+                        <p>{resumo.entrada}</p>
                     </div>
                 </div>
                 <div className="card noneAnimation">
                     <TbPackageExport className="red"/>
                     <div>
                         <h1>Saidas</h1>
-                        <p>1</p>
+                        <p>{resumo.saida}</p>
                     </div>
                 </div>
                 <div className="card noneAnimation">
                     <TbClock className="blue"/>
                     <div>
                         <h1>Ultima movimentação</h1>
-                        <p>1</p>
+                        <p>{resumo.ultimaTransicao}</p>
                     </div>
                 </div>
             </section>
             <section className="listas">
-                <ListaMove/>
+                <ListaMove busca={busca} status={status} dataInicio={dataInicio} dataFim={dataFim}/>
             </section>
             {mostrarAdicionar && (<AdicionarMovimentacao fechar={() => setMostrarAdicionar(false)} />)}
         </div>

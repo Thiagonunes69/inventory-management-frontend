@@ -1,49 +1,155 @@
+import "./faturamento.css";
+
 import {
-  LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Legend,
   ResponsiveContainer
 } from "recharts";
-const data = [
-  { mes: "Jan", faturamento: 4000, vendas: 24 },
-  { mes: "Fev", faturamento: 1000, vendas: 18 },
-  { mes: "Mar", faturamento: 5000, vendas: 30 },
-  { mes: "Abr", faturamento: 10000, vendas: 50 },
-];
+
+import { useEffect, useState } from "react";
 
 export default function Faturamento() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+
+    const token = localStorage.getItem("token");
+
+    fetch(
+      `${import.meta.env.VITE_API_URL}/api/transacoes/dadosGrafico/2026-05-01/2026-05-16`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+
+      .then((response) => {
+
+        if (!response.ok) {
+          throw new Error("Erro HTTP: " + response.status);
+        }
+
+        return response.json();
+      })
+
+      .then((dados) => {
+
+        const dadosFormatados = dados.map((item) => ({
+          ...item,
+          dia: formatarData(item.dia)
+        }));
+
+        setData(dadosFormatados);
+      })
+
+      .catch((erro) => {
+        console.log("Erro ao buscar gráfico:", erro);
+      });
+
+  }, []);
+
+  function formatarData(data) {
+
+    const partes = data.split("-");
+
+    return `${partes[2]}/${partes[1]}`;
+  }
+
   return (
-    <div className="FaturamentoGrafico">
-      <ResponsiveContainer>
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="mes" />
-          <Tooltip />
+
+    <div className="grafico-area relatorio">
+
+      <ResponsiveContainer width="100%" height="100%">
+
+        <LineChart
+          data={data}
+          margin={{
+            top: 20,
+            right: 20,
+            left: 0,
+            bottom: 10
+          }}
+        >
+
+          <CartesianGrid
+            strokeDasharray="4 4"
+            vertical={false}
+            stroke="#e5e7eb"
+          />
+
+          <XAxis
+            dataKey="dia"
+            tickLine={false}
+            axisLine={false}
+            tick={{
+              fill: "#6b7280",
+              fontSize: 14
+            }}
+          />
+
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tick={{
+              fill: "#6b7280",
+              fontSize: 14
+            }}
+          />
+
+          <Tooltip
+            contentStyle={{
+              borderRadius: "12px",
+              border: "none",
+              boxShadow: "0 4px 14px rgba(0,0,0,0.12)"
+            }}
+          />
+
           <Legend />
 
-          {/* eixo esquerdo */}
-          <YAxis yAxisId="left" />
-
-          {/* eixo direito */}
-          <YAxis yAxisId="right" orientation="right" />
-
-  
           <Line
-            yAxisId="left"
             type="monotone"
-            dataKey="faturamento"
-            stroke="#3B82F6"
-            strokeWidth={3}
+            dataKey="entradas"
+            name="Entradas"
+            stroke="#22c55e"
+            strokeWidth={4}
+            dot={{
+              r: 4,
+              strokeWidth: 3,
+              fill: "#fff"
+            }}
+            activeDot={{
+              r: 7
+            }}
           />
 
-          {/* vendas */}
           <Line
-            yAxisId="right"
             type="monotone"
-            dataKey="vendas"
-            stroke="#10B981"
-            strokeWidth={3}
+            dataKey="saidas"
+            name="Saídas"
+            stroke="#ef4444"
+            strokeWidth={4}
+            dot={{
+              r: 4,
+              strokeWidth: 3,
+              fill: "#fff"
+            }}
+            activeDot={{
+              r: 7
+            }}
           />
+
         </LineChart>
+
       </ResponsiveContainer>
+
     </div>
+
   );
 }

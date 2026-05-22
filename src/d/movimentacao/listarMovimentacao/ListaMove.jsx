@@ -1,13 +1,19 @@
 import "../../Dashboard.css";
-import "../../modais.css"
-import "./listaMove.css"
+import "../../modais.css";
+import "./listaMove.css";
 
 import { useState, useEffect } from "react";
-import { AiFillCloseCircle, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import { BiTransferAlt } from "react-icons/bi";
 
-function ListaMove() {
-  
+function ListaMove({
+  classname = "",
+  busca = "",
+  status = "todos",
+  dataInicio = "",
+  dataFim = "",
+  resumo,
+}) {
   const [movimentacoes, setMovimentacoes] = useState([]);
   const [modal, setModal] = useState(null);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
@@ -16,7 +22,7 @@ function ListaMove() {
     const fetchMove = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/transacoes",
+          `${import.meta.env.VITE_API_URL}/api/transacoes`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -40,7 +46,6 @@ function ListaMove() {
           quantidade: p.quantidade,
           data: p.data,
           observacao: p.observacao,
-          //loja: p.loja,
         }));
 
         setMovimentacoes(movimentacoesFormatadas);
@@ -55,6 +60,37 @@ function ListaMove() {
     fetchMove();
   }, []);
 
+  // FILTROS
+  const movimentacoesFiltradas = movimentacoes.filter((m) => {
+    // BUSCA
+    const matchBusca = m.nome
+      .toLowerCase()
+      .includes(busca.toLowerCase());
+
+    // STATUS
+    const matchStatus =
+      status === "todos" ||
+      m.tipo.toLowerCase() === status.toLowerCase();
+
+    // DATA
+    const dataMovimentacao = new Date(m.data);
+
+    const matchDataInicio =
+      !dataInicio ||
+      dataMovimentacao >= new Date(dataInicio);
+
+    const matchDataFim =
+      !dataFim ||
+      dataMovimentacao <= new Date(dataFim + "T23:59:59");
+
+    return (
+      matchBusca &&
+      matchStatus &&
+      matchDataInicio &&
+      matchDataFim
+    );
+  });
+
   const openModal = (tipo, produto) => {
     setProdutoSelecionado(produto);
     setModal(tipo);
@@ -64,8 +100,9 @@ function ListaMove() {
     setModal(null);
     setProdutoSelecionado(null);
   };
+
   return (
-    <div className="table">
+    <div className={`table ${classname}`}>
       <table>
         <thead>
           <tr>
@@ -80,22 +117,28 @@ function ListaMove() {
         </thead>
 
         <tbody>
-          {movimentacoes.map((m, index) => (
+          {movimentacoesFiltradas.map((m, index) => (
             <tr key={m.id}>
-              <td>{m.codigo}</td>
-              <td >{m.nome}</td>
+              <td><span className="codigo">{m.codigo}</span></td>
+
+              <td>{m.nome}</td>
+
               <td>
                 <span className={`tipo ${m.tipo.toLowerCase()}`}>
                   {m.tipo === "ENTRADA" && "Entrada"}
                   {m.tipo === "SAIDA" && "Saída"}
                 </span>
               </td>
+
               <td>{m.quantidade}</td>
+
               <td>
-                {/* <span className="tag">{m.loja}</span> */}
                 <span className="tag">Loja Central</span>
               </td>
-              <td>{new Date(m.data).toLocaleDateString("pt-BR")}</td>
+
+              <td>
+                {new Date(m.data).toLocaleDateString("pt-BR")}
+              </td>
 
               <td className="acoes">
                 <button onClick={() => openModal("view", m)}>
@@ -106,86 +149,78 @@ function ListaMove() {
           ))}
         </tbody>
       </table>
+
       {modal && (
-  <div className="overlay">
-    <div className="modal">
+        <div className="overlay">
+          <div className="modal">
+            <button className="close" onClick={closeModal}>
+              <AiOutlineClose />
+            </button>
 
-      {/* FECHAR */}
-      <button className="close" onClick={closeModal}>
-        <AiOutlineClose />
-      </button>
-
-      {/* TOPO */}
-      <div className="modalTop">
-
-        <div className="iconBox">
-          <BiTransferAlt />
-        </div>
-
-        <div>
-          <h1>Detalhes da Movimentação</h1>
-          <p>
-            Visualize as informações completas desta movimentação.
-          </p>
-        </div>
-
-      </div>
-
-      {/* BODY */}
-      <div className="modalBody">
-
-        <div className="row">
-          <span>Nome / Produto</span>
-
-          <div className="productInfo">
-            <h3>{produtoSelecionado.nome}</h3>
-
-            <div className="codigo">
-              {produtoSelecionado.codigo}
+            <div className="modalTop">
+              <div className="iconBox">
+                <BiTransferAlt />
+              </div>
+              <div>
+                <h1>Detalhes da Movimentação</h1>
+                <p>Visualize as informações completas desta movimentação.</p>
+              </div>
             </div>
+
+            <div className="modalBody">
+              <div className="row">
+                <span>Nome / Produto</span>
+                <div className="productInfo">
+                  <h3>{produtoSelecionado.nome}</h3>
+                  <div className="codigo">
+                    {produtoSelecionado.codigo}
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <span>Data e Hora</span>
+
+                <h3>{new Date(produtoSelecionado.data).toLocaleString("pt-BR")}</h3>
+              </div>
+
+              <div className="row">
+                <span>Tipo</span>
+
+                <div className={`tipo ${produtoSelecionado.tipo.toLowerCase()}`}>
+                  {produtoSelecionado.tipo}
+                </div>
+              </div>
+
+              <div className="row">
+                <span>Quantidade</span>
+
+                <h3>{produtoSelecionado.quantidade}</h3>
+              </div>
+
+              <div className="row">
+                <span>Loja</span>
+
+                <h3>Loja Central</h3>
+              </div>
+
+              <div className="row">
+                <span>Observação</span>
+
+                <h3>{produtoSelecionado.observacao}</h3>
+              </div>
+
+            </div>
+
+            <div className="modalFooter">
+              <button onClick={closeModal}>
+                Fechar
+              </button>
+            </div>
+
           </div>
         </div>
-
-        <div className="row">
-          <span>Data e Hora</span>
-          <h3>{produtoSelecionado.data}</h3>
-        </div>
-
-        <div className="row">
-          <span>Tipo</span>
-
-          <div className={`tipo ${produtoSelecionado.tipo}`}>
-            {produtoSelecionado.tipo}
-          </div>
-        </div>
-
-        <div className="row">
-          <span>Quantidade</span>
-          <h3>{produtoSelecionado.quantidade}</h3>
-        </div>
-
-        <div className="row">
-          <span>Loja</span>
-          <h3>Loja Central</h3>
-        </div>
-
-        <div className="row">
-          <span>Observação</span>
-          <h3>{produtoSelecionado.observacao}</h3>
-        </div>
-
-      </div>
-
-      {/* FOOTER */}
-      <div className="modalFooter">
-        <button onClick={closeModal}>
-          Fechar
-        </button>
-      </div>
-
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 }

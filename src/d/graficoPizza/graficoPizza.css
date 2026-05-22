@@ -1,0 +1,58 @@
+.graficoPizza{
+    width:100%;
+}
+
+.conteudoGrafico{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+}
+
+/* TAMANHO TOTAL DO GRAFICO */
+.areaGrafico{
+    width:280px;
+    height:280px;
+    flex-shrink:0;
+}
+
+.legenda{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+}
+
+.itemLegenda{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.infoLegenda{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.cor{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+}
+
+.itemLegenda h4{
+    font-size:15px;
+    color:#111827;
+    margin-bottom:4px;
+}
+
+.itemLegenda p{
+    font-size:13px;
+    color:#6b7280;
+}
+
+.itemLegenda strong{
+    color:#111827;
+    font-size:14px;
+}
