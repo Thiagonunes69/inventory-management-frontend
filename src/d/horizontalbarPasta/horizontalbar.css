@@ -1,18 +1,98 @@
 .horizontalbar{
     width: 100%;
+
     display: flex;
     align-items: center;
-    height: 50px;
-    padding: 0px 50px;
-    background-color: white;
-    flex-direction: row;
     justify-content: space-between;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+
+    min-height: 70px;
+
+    padding: 0 30px;
+
+    background-color: white;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+
+    margin-bottom: 25px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
 }
-.horizontalbar >div> h1{
-    font-size: 25px;
+
+.horizontalbar > div{
+    display: flex;
+    align-items: center;
 }
-.horizontalbar >div> svg{
-    font-size: 22px;
+
+.horizontalbar > div > h1{
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.horizontalbar > div > svg{
+    font-size: 24px;
+
+    background-color: #eff6ff;
+
+    padding: 10px;
+
+    border-radius: 50%;
+
+    color: #2563eb;
+
+    box-sizing: content-box;
+}
+
+/* ========================= */
+/* TABLET */
+/* ========================= */
+
+@media (max-width: 768px){
+
+    .horizontalbar{
+        padding: 0 20px;
+        min-height: 65px;
+    }
+
+    .horizontalbar > div > h1{
+        font-size: 20px;
+    }
+
+    .horizontalbar > div > svg{
+        font-size: 20px;
+        padding: 8px;
+    }
+}
+
+/* ========================= */
+/* CELULAR */
+/* ========================= */
+
+@media (max-width: 480px){
+
+    .horizontalbar{
+        padding: 12px 15px;
+
+        min-height: auto;
+
+        margin-bottom: 20px;
+    }
+
+    .horizontalbar > div > h1{
+        font-size: 16px;
+
+        max-width: 220px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .horizontalbar > div > svg{
+        font-size: 18px;
+        padding: 7px;
+    }
 }

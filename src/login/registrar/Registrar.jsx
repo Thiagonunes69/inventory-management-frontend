@@ -55,7 +55,7 @@ function Login() {
                 <label>Nome: <input type="text" onChange={(e) => setNome(e.target.value)}/></label>
                 <label>Senha: <input type="password" onChange={(e) => setSenha(e.target.value)}/></label>
                 <div className='bottom-form'>
-                  <label><input type="checkbox"/>Remember me</label>
+                  <div><input type="checkbox"/>Remember me</div>
                   <a href="/registrar">Forgot password?</a>
                 </div>
                 <div className='submit'>

@@ -4,15 +4,36 @@
 
 .table {
   background: white;
+
   padding: 20px;
+
   border-radius: 16px;
+
   height: 607px;
-  overflow-y: scroll;
+
+  overflow-y: auto;
+  overflow-x: auto;
+
   border-collapse: collapse;
+
+  width: 100%;
+}
+
+/* scrollbar bonita */
+
+.table::-webkit-scrollbar{
+  height: 8px;
+  width: 8px;
+}
+
+.table::-webkit-scrollbar-thumb{
+  background: #d1d5db;
+  border-radius: 20px;
 }
 
 table {
   width: 100%;
+  min-width: 850px;
 }
 
 th {
@@ -84,4 +105,34 @@ td {
 
 .acoes .delete {
   color: red;
+}
+
+@media (max-width: 768px){
+
+  .produtos{
+    padding: 10px;
+  }
+
+  .table{
+    padding: 15px;
+    height: auto;
+    max-height: 70vh;
+  }
+
+  th{
+    font-size: 13px;
+  }
+
+  td{
+    font-size: 13px;
+  }
+
+  .produto img{
+    width: 35px;
+    height: 35px;
+  }
+
+  .acoes button{
+    padding: 5px;
+  }
 }

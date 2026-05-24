@@ -275,3 +275,76 @@
   box-shadow:
     0 0 0 4px rgba(79, 70, 229, 0.10);
 }
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 768px){
+
+  .overlay{
+    padding: 15px;
+
+    padding-bottom: 90px;
+  }
+
+  .modal{
+    width: 100%;
+    max-width: 90%;
+    height: 90%;
+    padding: 20px;
+
+    border-radius: 20px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+  }
+
+  .modalTop{
+    align-items: flex-start;
+  }
+
+  .modalTop h1{
+    font-size: 22px;
+  }
+
+  .modalTop p{
+    font-size: 14px;
+  }
+
+  .iconBox{
+    width: 55px;
+    height: 55px;
+
+    font-size: 28px;
+  }
+
+  .row{
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .productInfo{
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .modalFooter{
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modalFooter button{
+    width: 100%;
+  }
+
+  .close{
+    top: 15px;
+    right: 15px;
+    width: 34px;
+    height: 34px;
+  }
+}

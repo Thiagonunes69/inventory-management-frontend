@@ -4,6 +4,7 @@
 }
 .DashBoard{
     flex: 1;
+    padding-bottom: 90px;
 }
 .bodyDashBoard{
     display: grid;
@@ -129,4 +130,79 @@
   content: "Periodo";
   font-size: 14px;
   margin-right: 4px;
+}
+
+@media (max-width: 768px){
+
+    .main{
+        flex-direction: column;
+    }
+
+    .DashBoard{
+        width: 100%;
+    }
+
+    .bodyDashBoard{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0px 12px;
+    }
+
+    .card,
+    .box{
+        width: 100%;
+        height: 60px;
+        border-radius: 12px;
+    }
+
+    /* CARDS */
+
+    .card{
+        min-height: 27px;
+        
+        padding: 12px 10px 12px 65px;
+
+        justify-content: center;
+    }
+
+    .card > svg{
+        font-size: 28px;
+
+        padding: 8px;
+
+        border-radius: 10px;
+
+        left: 10px;
+    }
+
+    .card > div{
+        gap: 2px;
+        align-items: flex-start;
+    }
+
+    .card > div > h1{
+        font-size: 11px;
+    }
+
+    .card > div > p{
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* BOX */
+
+    .box{
+        grid-column: span 2;
+        height: auto;
+        min-height: 250px;
+    }
+
+    .listas{
+        padding: 12px;
+    }
+
+    .card:hover,
+    .box:hover{
+        transform: none;
+    }
 }

@@ -6,7 +6,7 @@ function Horizontalbar() {
     <>
         <div className="horizontalbar">
             <div><h1>Bem vindo, {usuario?.nome}!</h1></div>
-            <div><FaUser/></div>
+            <div className="userIcon"><FaUser/></div>
         </div>
     </>
   )
