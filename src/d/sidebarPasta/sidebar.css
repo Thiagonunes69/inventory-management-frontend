@@ -40,7 +40,9 @@
     padding: 0 20px;
 }
 
-.sidebarBody > div{
+/* LINKS */
+
+.sidebarBody > a{
     display: flex;
     align-items: center;
 
@@ -53,23 +55,28 @@
     cursor: pointer;
 
     transition: 0.3s;
+
+    color: white;
+    text-decoration: none;
+
+    width: 100%;
 }
 
-.sidebarBody > div:hover{
+.sidebarBody > a:hover{
     background-color: rgba(255,255,255,0.08);
     transform: translateX(5px);
 }
 
-.sidebarBody > div > svg{
+.sidebarBody > a > svg{
     font-size: 22px;
     min-width: 22px;
 }
 
-.sidebarBody a{
-    color: white;
-    text-decoration: none;
+.sidebarBody > a > span{
     font-size: 16px;
 }
+
+/* USER */
 
 .sidebarBottom{
     margin-top: auto;
@@ -155,7 +162,7 @@
         gap: 0;
     }
 
-    .sidebarBody > div{
+    .sidebarBody > a{
         flex-direction: column;
 
         justify-content: center;
@@ -171,16 +178,16 @@
         padding: 0;
     }
 
-    .sidebarBody > div:hover{
+    .sidebarBody > a:hover{
         transform: none;
         background-color: rgba(255,255,255,0.05);
     }
 
-    .sidebarBody > div > svg{
+    .sidebarBody > a > svg{
         font-size: 20px;
     }
 
-    .sidebarBody a{
+    .sidebarBody > a > span{
         font-size: 11px;
     }
 }

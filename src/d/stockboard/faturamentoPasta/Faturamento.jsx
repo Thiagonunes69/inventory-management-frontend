@@ -13,33 +13,28 @@ import {
 
 import { useEffect, useState } from "react";
 
+// IMPORTA SUA FUNÇÃO
+import { apiFetch } from "../../../segurança/Api";
+
 export default function Faturamento() {
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
 
-    const token = localStorage.getItem("token");
+    async function carregarGrafico() {
 
-    fetch(
-      `${import.meta.env.VITE_API_URL}/api/transacoes/dadosGrafico/2026-05-01/2026-05-16`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
+      try {
 
-      .then((response) => {
+        const response = await apiFetch(
+          "/api/transacoes/dadosGrafico/2026-05-01/2026-05-16"
+        );
 
         if (!response.ok) {
           throw new Error("Erro HTTP: " + response.status);
         }
 
-        return response.json();
-      })
-
-      .then((dados) => {
+        const dados = await response.json();
 
         const dadosFormatados = dados.map((item) => ({
           ...item,
@@ -47,11 +42,16 @@ export default function Faturamento() {
         }));
 
         setData(dadosFormatados);
-      })
 
-      .catch((erro) => {
+      } catch (erro) {
+
         console.log("Erro ao buscar gráfico:", erro);
-      });
+
+      }
+
+    }
+
+    carregarGrafico();
 
   }, []);
 
@@ -119,14 +119,6 @@ export default function Faturamento() {
             name="Entradas"
             stroke="#22c55e"
             strokeWidth={4}
-            dot={{
-              r: 4,
-              strokeWidth: 3,
-              fill: "#fff"
-            }}
-            activeDot={{
-              r: 7
-            }}
           />
 
           <Line
@@ -135,14 +127,6 @@ export default function Faturamento() {
             name="Saídas"
             stroke="#ef4444"
             strokeWidth={4}
-            dot={{
-              r: 4,
-              strokeWidth: 3,
-              fill: "#fff"
-            }}
-            activeDot={{
-              r: 7
-            }}
           />
 
         </LineChart>
