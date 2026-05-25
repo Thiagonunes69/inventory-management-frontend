@@ -19,7 +19,7 @@ import ListaMove from "./listarMovimentacao/ListaMove";
 import AdicionarMovimentacao from "./adicionarMovimentacao/AdicionarMovimentacao";
 
 // IMPORTA SUA FUNÇÃO
-import { apiFetch } from "../../services/api";
+import { apiFetch } from "../../segurança/Api";
 
 function Movimentacao() {
 
