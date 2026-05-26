@@ -5,13 +5,16 @@
     justify-content: space-between;
     padding: 25px 50px;
 }
+
 .topDivProdutos > div:first-child > h1{
     font-size: 30px;
 }
+
 .topDivProdutos > div:first-child > h2{
     font-size: 13px;
-    color: #494949;;
+    color: #494949;
 }
+
 .produtosPesquisa{
     display: flex;
     flex-direction: row;
@@ -19,20 +22,24 @@
     justify-content: space-between;   
     gap: 15px;
 }
+
 .produtosPesquisa > .bnt-pesquisarProduto{
     display: flex;
     gap: 10px;
     align-items: center;
 }
+
 .bnt-pesquisarProduto > svg{
     font-size: 25px;
 }
+
 .bnt-pesquisarProduto > input{
     font-size: 16px;
     outline: none;
     border: none;
     height: 40px;
 }
+
 .produtosPesquisa > select,
 .produtosPesquisa > div,
 .produtosPesquisa > button{
@@ -44,6 +51,7 @@
     height: 45px;
     transition: 0.3s;
 }
+
 .produtosPesquisa > select:hover,
 .produtosPesquisa > div:hover,
 .produtosPesquisa > button:hover{
@@ -54,9 +62,12 @@
     background-color: var(--sidebar-color);
     color: white;
 }
-.noneAnimation:hover, .noneAnimation:hover{
+
+.noneAnimation:hover, 
+.noneAnimation:hover{
     transform: none;
 }
+
 /* ========================= */
 /* TABLET */
 /* ========================= */
@@ -67,7 +78,6 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
-
         padding: 20px;
     }
 
@@ -92,32 +102,77 @@
         padding: 15px;
     }
 
+    .topDivProdutos > div:first-child{
+        width: 100%;
+    }
+
     .topDivProdutos > div:first-child > h1{
         font-size: 24px;
     }
 
+    /* GRID MOBILE */
     .produtosPesquisa{
-        flex-direction: column;
-        align-items: stretch;
+        width: 100%;
+
         display: grid;
-        grid-template-columns: 1fr;
-        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+
+        align-items: stretch;
     }
 
-    .produtosPesquisa > select,
-    .produtosPesquisa > div,
+    /* PESQUISA ocupa toda linha */
+    .produtosPesquisa > .bnt-pesquisarProduto{
+        grid-column: 1 / 3;
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        padding: 0px 12px;
+        height: 50px;
+
+        background: white;
+        border-radius: 12px;
+
+        box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* SELECTS metade/metade */
+    .produtosPesquisa > select{
+        width: 100%;
+        height: 50px;
+
+        background: white;
+        border-radius: 12px;
+    }
+
+    /* BOTÃO ocupa toda linha */
     .produtosPesquisa > button{
+        grid-column: 1 / 3;
+
         width: 100%;
+        height: 50px;
+
+        border-radius: 12px;
+
+        font-weight: 600;
+        font-size: 16px;
     }
 
-    .bnt-pesquisarProduto{
-        width: 100%;
+    .bnt-pesquisarProduto > svg{
+        font-size: 22px;
+        color: #666;
     }
 
     .bnt-pesquisarProduto > input{
         width: 100%;
+        height: 100%;
+        font-size: 16px;
+        background: transparent;
     }
 
+    /* REMOVE ANIMAÇÃO NO MOBILE */
     .produtosPesquisa > button:hover,
     .produtosPesquisa > select:hover,
     .produtosPesquisa > div:hover{

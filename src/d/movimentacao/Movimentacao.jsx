@@ -1,5 +1,5 @@
 import "../Dashboard.css";
-
+import "./movimentacao.css"
 import Horizontalbar from "../horizontalbarPasta/Horizontalbar";
 import Sidebar from "../sidebarPasta/Sidebartemp";
 
@@ -97,7 +97,7 @@ function Movimentacao() {
 
           </div>
 
-          <div className="produtosPesquisa">
+          <div className="produtosPesquisa movimentacaoMobile">
 
             <div className="bnt-pesquisarProduto">
 
@@ -110,15 +110,6 @@ function Movimentacao() {
               />
 
             </div>
-
-            <select onChange={(e) => setStatus(e.target.value)}>
-
-              <option value="todos">Todos os Tipos</option>
-              <option value="ENTRADA">Entrada</option>
-              <option value="SAIDA">Saida</option>
-
-            </select>
-
             <div className="filtro-data">
 
               <input
@@ -136,6 +127,13 @@ function Movimentacao() {
               />
 
             </div>
+            <select onChange={(e) => setStatus(e.target.value)}>
+
+              <option value="todos">Todos os Tipos</option>
+              <option value="ENTRADA">Entrada</option>
+              <option value="SAIDA">Saida</option>
+
+            </select>
 
             <button onClick={() => setMostrarAdicionar(true)}>
               + Nova Movimentação
