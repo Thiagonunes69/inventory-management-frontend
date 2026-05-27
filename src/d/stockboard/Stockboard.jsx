@@ -8,7 +8,16 @@ import BestSaller from "./bestSaller/BestSaller";
 import PedidosRecentes from "./pedidosRecentes/PedidosRecentes";
 import LowVolume from "./LowVolume/LowVolume";
 
+import { useEffect, useState } from "react";
 function DashBoard() {
+    const hoje = new Date().toISOString().split("T")[0];
+    const dataPassada = new Date();
+    dataPassada.setDate(dataPassada.getDate() - 7);
+  
+    const umaSemanaAtras = dataPassada.toISOString().split("T")[0];
+  
+    const [dataInicio, setDataInicio] = useState(umaSemanaAtras);
+    const [dataFim, setDataFim] = useState(hoje);
   
   return (
     <div className="main">
@@ -58,7 +67,7 @@ function DashBoard() {
                   <option value="anos">5 Anos</option>
                 </select>
               </div>
-              <Faturamento/>
+              <Faturamento dataInicio={dataInicio} dataFim={dataFim}/>
             </div>
           </div>
           <div className="box">

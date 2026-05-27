@@ -7,6 +7,7 @@ import Produtos from "./d/produtos/Produtos";
 import Movimentacao from "./d/movimentacao/Movimentacao";
 import ListagemProdutos from "./d/produtos/listarProdutos/ListagemProdutos";
 import Relatorio from "./d/relatorio/Relatorio";
+import EstoqueBaixo from "./d/estoqueBaixo/EstoqueBaixo"
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
         <Route path='/movimentacao' element={<Movimentacao/>}></Route>
         <Route path='/testes' element={<ListagemProdutos/>}></Route>
         <Route path='/relatorio' element={<Relatorio/>}></Route>
+        <Route path="/estoque-baixo" element={<EstoqueBaixo/>}></Route>
       </Routes>
     </BrowserRouter>
   )

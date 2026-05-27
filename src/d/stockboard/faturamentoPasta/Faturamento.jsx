@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 // IMPORTA SUA FUNÇÃO
 import { apiFetch } from "../../../segurança/Api";
 
-export default function Faturamento() {
+export default function Faturamento({ dataInicio, dataFim }) {
 
   const [data, setData] = useState([]);
 
@@ -27,7 +27,7 @@ export default function Faturamento() {
       try {
 
         const response = await apiFetch(
-          "/api/transacoes/dadosGrafico/2026-05-01/2026-05-16"
+          `/api/transacoes/dadosGrafico/${dataInicio}/${dataFim}`
         );
 
         if (!response.ok) {
@@ -53,7 +53,7 @@ export default function Faturamento() {
 
     carregarGrafico();
 
-  }, []);
+  }, [dataInicio, dataFim]);
 
   function formatarData(data) {
 

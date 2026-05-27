@@ -1,77 +1,73 @@
-import "./listagemProdutos.css";
-import "../../modais.css"
+import "../../produtos/listarProdutos/listagemProdutos.css";
+import "../../modais.css";
 import { useState, useEffect } from "react";
-import { AiFillCloseCircle,AiOutlineClose } from "react-icons/ai";
+import { AiFillCloseCircle, AiOutlineClose } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
-import EditarProduto from "../editarProduto/EditarProduto";
 
-function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", resumo}) {
+function ListagemProdutos({
+  busca = "",
+  categoria = "todos",
+  status = "todos",
+  resumo,
+}) {
   const [produtos, setProdutos] = useState([]);
 
   const [modal, setModal] = useState(null);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
 
- useEffect(() => {
-  const fetchProdutos = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/produtos/listar`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/produtos/listar`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Erro ao buscar produtos");
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Erro ao buscar produtos");
+        const data = await response.json();
+
+        // 🔥 agora usando os dados reais do backend
+        const produtosFormatados = data.map((p) => ({
+          id: p.id,
+          nome: p.nome,
+          descricao: p.descricao,
+          codigo: p.codigo,
+          estoque: p.qnt,
+          status: p.status?.toLowerCase(),
+          usuarioNome: p.usuarioNome,
+          imagem: "https://via.placeholder.com/40",
+        }));
+
+        setProdutos(produtosFormatados);
+
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao carregar produtos");
       }
+    };
 
-      const data = await response.json();
+    fetchProdutos();
+  }, []);
 
-      // 🔥 adapta pro seu front
-      const produtosFormatados = data.map((p) => ({
-        id: p.id,
-        nome: p.nome,
-        descricao: p.descricao,
-        codigo: p.codigo,
-        estoque: p.qnt, // backend usa qnt
-        categoria: p.usuarioNome, //  TEMPORÁRIO (ajuste se tiver categoria real)
-        preco: 0, //  se não vier ainda
-        imagem: "https://via.placeholder.com/40",
-      }));
-
-      setProdutos(produtosFormatados);
-      console.log(data)
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao carregar produtos");
-    }
-  };
-
-  fetchProdutos();
-}, []);
-
-  const getStatus = (estoque) => {
-    if (estoque === 0) return "esgotado";
-    if (estoque <= 5) return "baixo";
-    return "ok";
-  };
-
-  // 🔥 FILTRO AQUI
+  // 🔥 mostra apenas baixo ou esgotado
   const produtosFiltrados = produtos.filter((p) => {
-    const matchBusca = p.nome.toLowerCase().includes(busca.toLowerCase());
-
-    const matchCategoria =
-      categoria === "todos" || p.categoria === categoria;
-
-    const statusProduto = getStatus(p.estoque);
+    const matchBusca = p.nome
+      .toLowerCase()
+      .includes(busca.toLowerCase());
 
     const matchStatus =
-      status === "todos" || statusProduto === status;
+      p.status === "baixo" || p.status === "esgotado";
 
-    return matchBusca && matchCategoria && matchStatus;
+    return matchBusca && matchStatus;
   });
 
   // HANDLERS
@@ -101,13 +97,13 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
         throw new Error("Erro ao deletar produto");
       }
 
-      // remove da tela depois de deletar no backend
-      // remover dps
       setProdutos((prev) =>
         prev.filter((p) => p.id !== produtoSelecionado.id)
       );
+
       closeModal();
-      window.location.reload();//alterar dps!!
+
+      window.location.reload();
     } catch (error) {
       console.error(error);
       alert("❌ Erro ao deletar produto");
@@ -122,49 +118,56 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
             <tr>
               <th>ID</th>
               <th>Produto</th>
-              <th>Categoria</th>
-              <th>Preço</th>
+              <th>Código</th>
               <th>Estoque</th>
               <th>Status</th>
+              <th>Usuário</th>
               <th>Ações</th>
             </tr>
           </thead>
 
           <tbody>
             {produtosFiltrados.map((p, index) => {
-              const status = getStatus(p.estoque);
-
               return (
                 <tr key={p.id}>
                   <td>#{String(index + 1).padStart(3, "0")}</td>
 
                   <td className="produto">
                     <img src={p.imagem} alt="" />
+
                     <div>
                       <strong>{p.nome}</strong>
-                      <span>{p.categoria}</span>
+                      <span>{p.descricao}</span>
                     </div>
                   </td>
 
                   <td>
-                    <span className="tag">{p.categoria}</span>
+                    <span className="tag">{p.codigo}</span>
                   </td>
-
-                  <td>R$ {p.preco}</td>
 
                   <td>{p.estoque}</td>
 
                   <td>
-                    <span className={`status ${status}`}>
-                      {status === "ok" && "Em estoque"}
-                      {status === "baixo" && "Estoque baixo"}
-                      {status === "esgotado" && "Esgotado"}
+                    <span className={`status ${p.status}`}>
+                      {p.status === "em estoque" && "Em estoque"}
+                      {p.status === "baixo" && "Estoque baixo"}
+                      {p.status === "esgotado" && "Esgotado"}
                     </span>
                   </td>
 
+                  <td>{p.usuarioNome}</td>
+
                   <td className="acoes">
-                    <button onClick={() => openModal("edit", p)}>✏️</button>
-                    <button className="delete" onClick={() => openModal("delete", p)}>🗑️</button>
+                    <button onClick={() => openModal("edit", p)}>
+                      ✏️
+                    </button>
+
+                    <button
+                      className="delete"
+                      onClick={() => openModal("delete", p)}
+                    >
+                      🗑️
+                    </button>
                   </td>
                 </tr>
               );
@@ -182,22 +185,15 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
             </button>
 
             {modal === "edit" && (
-              <>
-                <EditarProduto closeModal={closeModal} produto={produtoSelecionado} setProdutos={setProdutos} />
-              </>
+              <EditarProduto
+                closeModal={closeModal}
+                produto={produtoSelecionado}
+                setProdutos={setProdutos}
+              />
             )}
 
-            {/* {modal === "view" && (
-              <>
-                <h2>{produtoSelecionado.nome}</h2>
-                <p>Categoria: {produtoSelecionado.categoria}</p>
-                <p>Preço: R$ {produtoSelecionado.preco}</p>
-                <p>Estoque: {produtoSelecionado.estoque}</p>
-              </>
-            )} */}
-
             {modal === "delete" && (
-              <div className=" deleteModal">
+              <div className="deleteModal">
                 <button className="close" onClick={closeModal}>
                   <AiOutlineClose />
                 </button>
@@ -219,22 +215,34 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
 
                     <div className="productInfo">
                       <h3>{produtoSelecionado.nome}</h3>
-                      <div className="codigo">{produtoSelecionado.codigo}</div>
+
+                      <div className="codigo">
+                        {produtoSelecionado.codigo}
+                      </div>
                     </div>
                   </div>
 
                   <div className="row">
                     <span>Status</span>
-                    <div className="tipo SAIDA">Será removido do sistema</div>
+
+                    <div className="tipo SAIDA">
+                      Será removido do sistema
+                    </div>
                   </div>
                 </div>
 
                 <div className="modalFooter">
-                  <button className="cancelButton" onClick={closeModal}>
+                  <button
+                    className="cancelButton"
+                    onClick={closeModal}
+                  >
                     Cancelar
                   </button>
 
-                  <button className="deleteButton" onClick={handleDelete}>
+                  <button
+                    className="deleteButton"
+                    onClick={handleDelete}
+                  >
                     Excluir
                   </button>
                 </div>

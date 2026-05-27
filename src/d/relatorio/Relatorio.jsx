@@ -19,29 +19,16 @@ function Relatorio() {
 
   const [busca, setBusca] = useState("");
   const [status, setStatus] = useState("todos"); 
-  const [dataInicio, setDataInicio] = useState("");
-  const [dataFim, setDataFim] = useState("");
+  const hoje = new Date().toISOString().split("T")[0];
 
+  const dataPassada = new Date();
+  dataPassada.setDate(dataPassada.getDate() - 7);
 
-// useEffect(() => {
-//   const fetchResumo = async () => {
-//     const response = await fetch(
-//       "http://localhost:8080/api/transacoes/resumo",
-//       {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         },
-//       }
-//     );
-    
-//     const data = await response.json();
-//     data.ultimaTransicao = new Date(data.ultimaTransicao).toLocaleDateString("pt-BR");
-//     setResumo(data);
-//     console.log(data)
-//   };
+  const umaSemanaAtras = dataPassada.toISOString().split("T")[0];
 
-//   fetchResumo();
-// }, []);
+  const [dataInicio, setDataInicio] = useState(umaSemanaAtras);
+  const [dataFim, setDataFim] = useState(hoje);
+
   return (
     <div className="main">
         <Sidebar/>
@@ -97,7 +84,7 @@ function Relatorio() {
                         <div className="boxBody">
                         <div>
                         </div>
-                        <Faturamento/>
+                        <Faturamento dataInicio={dataInicio} dataFim={dataFim}/>
                         </div>
                     </div>
                     <div className="box relatorio">
