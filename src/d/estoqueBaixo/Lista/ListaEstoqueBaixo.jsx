@@ -19,7 +19,7 @@ function ListagemProdutos({
     const fetchProdutos = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/produtos/listar`,
+          `${import.meta.env.VITE_API_URL}/api/produtos/listarEstoqueBaixo`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -34,7 +34,6 @@ function ListagemProdutos({
 
         const data = await response.json();
 
-        // 🔥 agora usando os dados reais do backend
         const produtosFormatados = data.map((p) => ({
           id: p.id,
           nome: p.nome,
@@ -65,7 +64,7 @@ function ListagemProdutos({
       .includes(busca.toLowerCase());
 
     const matchStatus =
-      p.status === "baixo" || p.status === "esgotado";
+      p.status === "estoque baixo" || p.status === "esgotado";
 
     return matchBusca && matchStatus;
   });
@@ -130,7 +129,7 @@ function ListagemProdutos({
             {produtosFiltrados.map((p, index) => {
               return (
                 <tr key={p.id}>
-                  <td>#{String(index + 1).padStart(3, "0")}</td>
+                  <td><span className="codigo">{p.codigo}</span></td>
 
                   <td className="produto">
                     <img src={p.imagem} alt="" />
@@ -142,7 +141,7 @@ function ListagemProdutos({
                   </td>
 
                   <td>
-                    <span className="tag">{p.codigo}</span>
+                    <span className="codigo">{p.codigo}</span>
                   </td>
 
                   <td>{p.estoque}</td>
@@ -150,7 +149,7 @@ function ListagemProdutos({
                   <td>
                     <span className={`status ${p.status}`}>
                       {p.status === "em estoque" && "Em estoque"}
-                      {p.status === "baixo" && "Estoque baixo"}
+                      {p.status === "estoque baixo" && "Estoque baixo"}
                       {p.status === "esgotado" && "Esgotado"}
                     </span>
                   </td>

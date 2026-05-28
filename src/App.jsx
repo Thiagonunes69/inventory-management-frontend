@@ -8,6 +8,8 @@ import Movimentacao from "./d/movimentacao/Movimentacao";
 import ListagemProdutos from "./d/produtos/listarProdutos/ListagemProdutos";
 import Relatorio from "./d/relatorio/Relatorio";
 import EstoqueBaixo from "./d/estoqueBaixo/EstoqueBaixo"
+import Configuracoes from "./Perfil/configuracao/Configuracoes";
+import EditarPerfil from "./Perfil/configuracao/perfil/EditarPerfil";
 
 function App() {
   
@@ -23,6 +25,8 @@ function App() {
         <Route path='/testes' element={<ListagemProdutos/>}></Route>
         <Route path='/relatorio' element={<Relatorio/>}></Route>
         <Route path="/estoque-baixo" element={<EstoqueBaixo/>}></Route>
+        <Route path="/configuracao" element={<Configuracoes/>}></Route>
+        <Route path="/editarPerfil" element={<EditarPerfil/>}></Route>
       </Routes>
     </BrowserRouter>
   )

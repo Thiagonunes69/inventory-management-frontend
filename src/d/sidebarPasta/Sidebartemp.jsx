@@ -41,16 +41,13 @@ function Sidebar() {
           </a>
 
         </div>
-
-        <div className="sidebarBottom">
+        <a className="sidebarBottom" href="/configuracao">
           <FaUser />
-
           <div>
             <h1>nome</h1>
             <p>role</p>
           </div>
-        </div>
-
+        </a>
       </div>
     </>
   )

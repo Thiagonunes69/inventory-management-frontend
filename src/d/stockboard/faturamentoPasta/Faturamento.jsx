@@ -13,7 +13,6 @@ import {
 
 import { useEffect, useState } from "react";
 
-// IMPORTA SUA FUNÇÃO
 import { apiFetch } from "../../../segurança/Api";
 
 export default function Faturamento({ dataInicio, dataFim }) {

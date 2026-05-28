@@ -123,7 +123,7 @@ function Produtos() {
 
             <div>
               <h1>Total Produtos</h1>
-              <p>{resumo.total}</p>
+              <p>{resumo.estoqueBaixo + resumo.emEstoque}</p>
             </div>
 
           </div>

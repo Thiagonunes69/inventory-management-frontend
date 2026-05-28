@@ -1,0 +1,426 @@
+/* ========================= */
+/* PAGE */
+/* ========================= */
+
+.config-page{
+    padding: 30px 40px;
+}
+.dashboard-content{
+    width: 100%;
+}
+/* ========================= */
+/* TOPO */
+/* ========================= */
+
+.config-top{
+    margin-bottom: 25px;
+}
+
+.config-top h1{
+    font-size: 42px;
+    font-weight: 700;
+    color: #0b132b;
+}
+
+.config-top p{
+    margin-top: 5px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+/* ========================= */
+/* LISTA */
+/* ========================= */
+
+.config-list{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.config-card{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.config-card:hover{
+    transform: translateY(-3px);
+}
+
+.config-left{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* ========================= */
+/* ÍCONE */
+/* ========================= */
+
+.config-icon{
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #f1f5ff;
+
+    color: #1d4ed8;
+
+    font-size: 22px;
+}
+
+/* ========================= */
+/* INFO */
+/* ========================= */
+
+.config-info h2{
+    font-size: 19px;
+    font-weight: 600;
+
+    color: #111827;
+}
+
+.config-info p{
+    margin-top: 3px;
+
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* ========================= */
+/* SETA */
+/* ========================= */
+
+.arrow-icon{
+    color: #9ca3af;
+    font-size: 18px;
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.dashboard-header{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 30px;
+
+    background: white;
+
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+}
+
+.dashboard-header h1{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.perfil-icon{
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 18px;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 768px){
+
+    .config-page{
+        padding: 20px 15px 100px;
+    }
+
+    .config-top h1{
+        font-size: 32px;
+    }
+
+    .config-card{
+        padding: 18px;
+    }
+
+    .config-icon{
+        width: 50px;
+        height: 50px;
+
+        font-size: 18px;
+    }
+
+    .config-info h2{
+        font-size: 16px;
+    }
+
+    .config-info p{
+        font-size: 12px;
+    }
+
+    .dashboard-header{
+        padding: 15px;
+    }
+
+    .dashboard-header h1{
+        font-size: 18px;
+    }
+}
+
+/* ========================= */
+/* EDITAR PERFIL */
+/* ========================= */
+
+.perfil-container{
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 25px;
+
+    margin-top: 20px;
+}
+
+/* ========================= */
+/* FOTO */
+/* ========================= */
+
+.perfil-foto-card{
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: fit-content;
+}
+
+.perfil-foto-card h3{
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    font-size: 18px;
+    color: #111827;
+}
+
+.foto-preview{
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #2563eb;
+
+    font-size: 60px;
+
+    margin-bottom: 20px;
+}
+
+.btn-foto{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #071739;
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-foto:hover{
+    opacity: 0.9;
+}
+
+.perfil-foto-card span{
+    margin-top: 15px;
+
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* ========================= */
+/* FORM */
+/* ========================= */
+
+.perfil-form-card{
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label{
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.input-group input,
+.input-group select{
+    width: 100%;
+
+    height: 50px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 0px 15px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus{
+    border-color: #2563eb;
+}
+
+/* ========================= */
+/* ACTIONS */
+/* ========================= */
+
+.perfil-actions{
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 10px;
+}
+
+.btn-salvar{
+    background: #071739;
+    color: white;
+
+    border: none;
+
+    height: 50px;
+
+    padding: 0px 25px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-salvar:hover{
+    opacity: 0.9;
+}
+
+/* ========================= */
+/* BREADCRUMB */
+/* ========================= */
+
+.breadcrumb{
+    font-size: 14px;
+    color: #6b7280;
+
+    margin-bottom: 10px;
+
+    display: block;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 768px){
+
+    .perfil-container{
+        grid-template-columns: 1fr;
+    }
+
+    .perfil-foto-card,
+    .perfil-form-card{
+        padding: 20px;
+    }
+
+    .foto-preview{
+        width: 120px;
+        height: 120px;
+
+        font-size: 50px;
+    }
+
+    .perfil-actions{
+        justify-content: stretch;
+    }
+
+    .btn-salvar{
+        width: 100%;
+    }
+}

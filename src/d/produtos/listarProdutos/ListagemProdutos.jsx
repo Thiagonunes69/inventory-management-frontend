@@ -120,7 +120,7 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
         <table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Codigo</th>
               <th>Produto</th>
               <th>Categoria</th>
               <th>Preço</th>
@@ -135,8 +135,8 @@ function ListagemProdutos({ busca = "", categoria = "todos", status = "todos", r
               const status = getStatus(p.estoque);
 
               return (
-                <tr key={p.id}>
-                  <td>#{String(index + 1).padStart(3, "0")}</td>
+                <tr >
+                  <td><span className="codigo">{p.codigo}</span></td>
 
                   <td className="produto">
                     <img src={p.imagem} alt="" />

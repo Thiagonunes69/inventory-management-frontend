@@ -4,7 +4,7 @@
 }
 .DashBoard{
     flex: 1;
-    padding-bottom: 90px;
+
 }
 .bodyDashBoard{
     display: grid;
@@ -140,6 +140,7 @@
 
     .DashBoard{
         width: 100%;
+            padding-bottom: 90px;
     }
 
     .bodyDashBoard{
