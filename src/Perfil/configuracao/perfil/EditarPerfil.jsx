@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "../configuracoes.css";
 
 import Sidebar from "../../../d/sidebarPasta/Sidebartemp";
@@ -8,7 +9,77 @@ import {
   FaCamera
 } from "react-icons/fa";
 
+import { apiFetch } from "../../../segurança/Api";
+
 export default function EditarPerfil() {
+
+  const [usuario, setUsuario] = useState({
+    nome: "",
+    email: "",
+    nomeEmpresa: "",
+    senha: "",
+    foto: ""
+  });
+
+  useEffect(() => {
+    buscarMeusDados();
+  }, []);
+
+  async function buscarMeusDados() {
+
+    try {
+
+      const response = await apiFetch("/api/usuarios/eu/meusDados");
+
+      if (!response.ok) {
+        throw new Error("Erro ao buscar usuário.");
+      }
+
+      const data = await response.json();
+
+      setUsuario(data);
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+
+  async function salvarAlteracoes() {
+
+    try {
+
+      const response = await apiFetch("/api/usuarios/eu/editarMeusDados", {
+        method: "PUT",
+        body: JSON.stringify({
+          nome: usuario.nome,
+          email: usuario.email,
+          nomeEmpresa: usuario.nomeEmpresa
+        })
+      });
+
+      if (!response.ok) {
+
+        const mensagem = await response.text();
+        throw new Error(mensagem || "Erro ao atualizar perfil.");
+
+      }
+
+      const data = await response.json();
+
+      setUsuario(data);
+
+      alert("Perfil atualizado com sucesso!");
+
+    } catch (error) {
+
+      alert(error.message);
+
+    }
+
+  }
 
   return (
     <div className="dashboard-container main">
@@ -21,25 +92,22 @@ export default function EditarPerfil() {
 
         <main className="config-page">
 
-          {/* TOPO */}
           <div className="config-top">
 
             <span className="breadcrumb">
-              Configurações &gt; <b>Editar Perfil</b>
+              <a href="/configuracao">Configurações</a> &gt; <b>Editar Perfil</b>
             </span>
 
-            <h1>Editar Perfil</h1>
+            <h1>Perfil</h1>
 
             <p>
-              Atualize suas informações pessoais.
+              Visualize e atualize suas informações pessoais.
             </p>
 
           </div>
 
-          {/* CONTEÚDO */}
           <div className="perfil-container">
 
-            {/* FOTO */}
             <div className="perfil-foto-card">
 
               <h3>Foto de Perfil</h3>
@@ -59,7 +127,6 @@ export default function EditarPerfil() {
 
             </div>
 
-            {/* FORM */}
             <div className="perfil-form-card">
 
               <div className="input-group">
@@ -68,7 +135,30 @@ export default function EditarPerfil() {
 
                 <input
                   type="text"
-                  value="Thianunes Pereira"
+                  value={usuario.nome}
+                  onChange={(e) =>
+                    setUsuario({
+                      ...usuario,
+                      nome: e.target.value
+                    })
+                  }
+                />
+
+              </div>
+
+              <div className="input-group">
+
+                <label>Nome Empresa</label>
+
+                <input
+                  type="text"
+                  value={usuario.nomeEmpresa}
+                  onChange={(e) =>
+                    setUsuario({
+                      ...usuario,
+                      nomeEmpresa: e.target.value
+                    })
+                  }
                 />
 
               </div>
@@ -79,50 +169,35 @@ export default function EditarPerfil() {
 
                 <input
                   type="email"
-                  value="thianunes246@gmail.com"
+                  value={usuario.email}
+                  onChange={(e) =>
+                    setUsuario({
+                      ...usuario,
+                      email: e.target.value
+                    })
+                  }
                 />
 
               </div>
 
               <div className="input-group">
 
-                <label>Telefone</label>
+                <label>Senha</label>
 
                 <input
-                  type="text"
-                  value="(11) 99999-9999"
+                  type="password"
+                  value={usuario.senha}
+                  readOnly
                 />
-
-              </div>
-
-              <div className="input-group">
-
-                <label>Cargo</label>
-
-                <input
-                  type="text"
-                  value="Administrador"
-                />
-
-              </div>
-
-              <div className="input-group">
-
-                <label>Loja</label>
-
-                <select>
-
-                  <option>Loja Central</option>
-                  <option>Loja Norte</option>
-                  <option>Loja Sul</option>
-
-                </select>
 
               </div>
 
               <div className="perfil-actions">
 
-                <button className="btn-salvar">
+                <button
+                  className="btn-salvar"
+                  onClick={salvarAlteracoes}
+                >
                   Salvar Alterações
                 </button>
 

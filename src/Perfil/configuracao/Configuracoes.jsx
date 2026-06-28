@@ -16,26 +16,31 @@ export default function Configuracoes() {
 
   const opcoes = [
     {
+      link:"editarPerfil",
       icon: <FaUser />,
       titulo: "Editar Perfil",
       descricao: "Atualize suas informações pessoais e de contato"
     },
     {
+      link:"alterarSenha",
       icon: <FaLock />,
       titulo: "Alterar Senha",
       descricao: "Altere sua senha de acesso à plataforma"
     },
     {
+      link:"#",
       icon: <FaBell />,
-      titulo: "Notificações",
+      titulo: "Notificações - em breve",
       descricao: "Gerencie suas preferências de notificações"
     },
     {
+      link:"#",
       icon: <FaCog />,
-      titulo: "Preferências",
+      titulo: "Preferências - em breve",
       descricao: "Configurações gerais da plataforma"
     },
     {
+      link:"/seguranca",
       icon: <FaShieldAlt />,
       titulo: "Segurança",
       descricao: "Gerencie sessões e dispositivos conectados"
@@ -69,7 +74,7 @@ export default function Configuracoes() {
           <div className="config-list">
 
             {opcoes.map((item, index) => (
-
+              <a href={item.link}>
               <div className="config-card" key={index}>
 
                 <div className="config-left">
@@ -91,6 +96,7 @@ export default function Configuracoes() {
                 <FaChevronRight className="arrow-icon" />
 
               </div>
+              </a>
 
             ))}
 

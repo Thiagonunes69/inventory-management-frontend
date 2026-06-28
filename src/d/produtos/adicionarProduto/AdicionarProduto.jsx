@@ -6,17 +6,16 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineInventory2 } from "react-icons/md";
 
 function AdicionarProduto({ fechar }) {
-
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [codigo, setCodigo] = useState("");
-  const [qnt, setQnt] = useState("");
+  const [qntCaixa, setQntCaixa] = useState("");
+  const [unidPorCaixa, setUnidPorCaixa] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/produtos/adicionarProduto`,
         {
@@ -31,7 +30,8 @@ function AdicionarProduto({ fechar }) {
             nome,
             descricao,
             codigo,
-            qnt: Number(qnt),
+            qntCaixa: Number(qntCaixa),
+            unidPorCaixa: Number(unidPorCaixa),
           }),
         }
       );
@@ -43,7 +43,6 @@ function AdicionarProduto({ fechar }) {
       fechar();
 
       window.location.reload();
-
     } catch (error) {
       alert("❌ Erro ao adicionar produto");
     }
@@ -55,6 +54,7 @@ function AdicionarProduto({ fechar }) {
         <button className="close" onClick={fechar}>
           <AiOutlineClose />
         </button>
+
         <div className="modalTop">
           <div className="iconBox produtoIcon">
             <MdOutlineInventory2 />
@@ -65,33 +65,76 @@ function AdicionarProduto({ fechar }) {
             <p>Adicione um novo produto ao estoque.</p>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
 
+        <form onSubmit={handleSubmit}>
           <div className="modalBody">
             <div className="input-group">
               <label>Nome</label>
 
-              <input type="text" placeholder="Digite o nome do produto..." value={nome} onChange={(e) => setNome(e.target.value)} required/>
+              <input
+                type="text"
+                placeholder="Digite o nome do produto..."
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                required
+              />
             </div>
+
             <div className="input-group">
               <label>Descrição</label>
 
-              <input type="text" placeholder="Digite uma descrição..." value={descricao} onChange={(e) => setDescricao(e.target.value)} required/>
+              <input
+                type="text"
+                placeholder="Digite uma descrição..."
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+                required
+              />
             </div>
+
             <div className="input-group">
               <label>Código</label>
 
-              <input type="text" placeholder="Digite o código..." value={codigo} onChange={(e) => setCodigo(e.target.value)} required/>
+              <input
+                type="text"
+                placeholder="Digite o código..."
+                value={codigo}
+                onChange={(e) => setCodigo(e.target.value)}
+                required
+              />
             </div>
-            <div className="input-group">
-              <label>Quantidade</label>
 
-              <input type="number" placeholder="Digite a quantidade..." value={qnt} onChange={(e) => setQnt(e.target.value)} required/>
+            <div className="input-group">
+              <label>Quantidade de Caixas</label>
+
+              <input
+                type="number"
+                placeholder="Digite a quantidade de caixas..."
+                value={qntCaixa}
+                onChange={(e) => setQntCaixa(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Unidades por Caixa</label>
+
+              <input
+                type="number"
+                placeholder="Digite a quantidade de unidades por caixa..."
+                value={unidPorCaixa}
+                onChange={(e) => setUnidPorCaixa(e.target.value)}
+                required
+              />
             </div>
           </div>
 
           <div className="modalFooter">
-            <button type="button" className="cancelButton" onClick={fechar}>
+            <button
+              type="button"
+              className="cancelButton"
+              onClick={fechar}
+            >
               Cancelar
             </button>
 
@@ -99,7 +142,6 @@ function AdicionarProduto({ fechar }) {
               Salvar Produto
             </button>
           </div>
-
         </form>
       </div>
     </div>

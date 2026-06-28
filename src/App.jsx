@@ -10,6 +10,8 @@ import Relatorio from "./d/relatorio/Relatorio";
 import EstoqueBaixo from "./d/estoqueBaixo/EstoqueBaixo"
 import Configuracoes from "./Perfil/configuracao/Configuracoes";
 import EditarPerfil from "./Perfil/configuracao/perfil/EditarPerfil";
+import AlterarSenha from "./Perfil/configuracao/alterarSenha/AlterarSenha";
+import Seguranca from "./Perfil/configuracao/seguranca/Seguranca";
 
 function App() {
   
@@ -27,6 +29,8 @@ function App() {
         <Route path="/estoque-baixo" element={<EstoqueBaixo/>}></Route>
         <Route path="/configuracao" element={<Configuracoes/>}></Route>
         <Route path="/editarPerfil" element={<EditarPerfil/>}></Route>
+        <Route path="/alterarSenha" element={<AlterarSenha/>}></Route>
+        <Route path="/seguranca" element={<Seguranca/>}></Route>
       </Routes>
     </BrowserRouter>
   )

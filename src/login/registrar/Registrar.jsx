@@ -4,6 +4,7 @@ import '../Login.css'
 function Login() {
   const [email, setEmail] = useState("");
   const [nome, setNome] = useState("");
+  const [nomeEmpresa, setNomeEmpresa] = useState("");
   const [senha, setSenha] = useState("");
 
   function irLogin(){
@@ -21,6 +22,7 @@ function Login() {
       body: JSON.stringify({
         email,
         nome,
+        nomeEmpresa,
         senha
       })
     });
@@ -53,6 +55,7 @@ function Login() {
             <form onSubmit={handleRegister}>
                 <label>Email: <input type="text" onChange={(e) => setEmail(e.target.value)}/></label>
                 <label>Nome: <input type="text" onChange={(e) => setNome(e.target.value)}/></label>
+                <label>Nome da Empresa: <input type="text" onChange={(e) => setNomeEmpresa(e.target.value)}/></label>
                 <label>Senha: <input type="password" onChange={(e) => setSenha(e.target.value)}/></label>
                 <div className='bottom-form'>
                   <div><input type="checkbox"/>Remember me</div>
